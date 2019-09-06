@@ -8,6 +8,8 @@ rule scikit_classifier:
     log:
         "logs/qiime_scikit_classifier.log"
     threads: 10
+    conda:
+        "../envs/qiime2-2019.7.yaml"
     shell:
         ("qiime feature-classifier classify-sklearn --i-classifier {input.db} "
         "--i-reads {input.seq} --p-n-jobs {threads} --o-classification {output} "
@@ -20,6 +22,8 @@ rule tabulate_taxonomy:
         "results/qiime/vis/silva_taxonomy.qzv"
     log:
         "logs/qiime_tabulate_taxonomy.log"
+    conda:
+        "../envs/qiime2-2019.7.yaml"
     shell:
         "qiime metadata tabulate --m-input-file {input} --o-visualization {output} &> {log}"
         
@@ -34,6 +38,8 @@ rule barplot_taxonomy:
         "logs/qiime_tabulate_taxonomy.log"
     params:
         "metadata.tsv"
+    conda:
+        "../envs/qiime2-2019.7.yaml"
     shell:
         ("qiime taxa barplot --i-table  {input.table} --i-taxonomy {input.taxo} "
         "--m-metadata-file {params} --o-visualization {output} &> {log}")
@@ -47,6 +53,8 @@ rule artifact_to_krona:
         dir=directory("results/krona/")
     log:
         "logs/qiime2krona.log"
+    conda:
+        "../envs/qiime2-2019.7.yaml"
     shell:
         "python scripts/qiime2krona.py {input.taxo_art} {input.feat_art}  {output.dir}"
 
@@ -56,6 +64,8 @@ rule krona_plot:
         rules.artifact_to_krona.output
     output:
         "results/krona.html"
+    conda:
+        "../envs/krona.yaml"
     shell:
         "ktImportText -o {output} results/krona/*.tsv -c"
         

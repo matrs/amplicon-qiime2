@@ -10,6 +10,8 @@ rule dada2:
     params:
         config["params"]["dada2"]    
     threads:12 #To use all available threads
+    conda:
+        "../envs/qiime2-2019.7.yaml"
     shell:
         ("qiime dada2 denoise-paired --i-demultiplexed-seqs {input} "
         "{params} --p-n-threads {threads} --o-table {output.feat_table} "
@@ -23,6 +25,8 @@ rule feat_table_summary:
         "results/qiime/vis/table.qzv"
     log:
         "logs/qiime_table_summ.log"
+    conda:
+        "../envs/qiime2-2019.7.yaml"
     shell:
             "qiime feature-table summarize --i-table {input} --o-visualization {output} --verbose &> {log}"
 
@@ -33,6 +37,8 @@ rule denoi_summary:
         "results/qiime/vis/denoi_stats.qzv"
     log:
         "logs/qiime_table_summ.log"
+    conda:
+        "../envs/qiime2-2019.7.yaml"
     shell:
         "qiime metadata tabulate --m-input-file {input} --o-visualization {output} --verbose &> {log}"
 
@@ -43,6 +49,8 @@ rule rep_seqs_summary:
         "results/qiime/vis/rep_seqs.qzv"
     log:
         "logs/qiime_repseqs_summ.log"
+    conda:
+        "../envs/qiime2-2019.7.yaml"
     shell:
         ("qiime feature-table tabulate-seqs --i-data {input} --o-visualization "
         "{output} --verbose &> {log}")

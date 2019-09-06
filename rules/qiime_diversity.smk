@@ -9,6 +9,8 @@ rule alpha_rare:
         meta="metadata.tsv",
         min_depth=100,
         max_depth=145000
+    conda:
+        "../envs/qiime2-2019.7.yaml"
     shell:
         ("qiime diversity alpha-rarefaction --i-table {input} "
         "--m-metadata-file {params.meta} --o-visualization {output} "
@@ -43,6 +45,8 @@ rule core_metrics:
     params:
         depth=16000,
         meta="metadata.tsv"
+    conda:
+        "../envs/qiime2-2019.7.yaml"
     shell:
         ("qiime diversity core-metrics-phylogenetic  --i-phylogeny {input.tree} "
         "--i-table {input.table} --p-sampling-depth {params.depth} --m-metadata-file {params.meta} "
@@ -73,6 +77,8 @@ rule alpha_evenness:
         "logs/qiime_evenness.log"
     params:
         meta="metadata.tsv"
+    conda:
+        "../envs/qiime2-2019.7.yaml"
     shell:
         ("qiime diversity alpha-group-significance --i-alpha-diversity {input} " 
         "--m-metadata-file {params.meta} --o-visualization {output} &> {log}")
@@ -87,6 +93,8 @@ rule alpha_faith:
         "logs/qiime_faith.log"
     params:
         meta="metadata.tsv"        
+    conda:
+        "../envs/qiime2-2019.7.yaml"
     shell:
         ("qiime diversity alpha-group-significance --i-alpha-diversity {input} "
         "--m-metadata-file {params.meta} --o-visualization {output}  &> {log}")
@@ -101,6 +109,8 @@ rule beta_diversity_unweighted:
     params:
         meta="metadata.tsv",
         column=config["beta_diversity"]["column"]
+    conda:
+        "../envs/qiime2-2019.7.yaml"
     shell:
         ("qiime diversity beta-group-significance --i-distance-matrix {input} "
         "--m-metadata-file {params.meta} --m-metadata-column {params.column} "
@@ -116,6 +126,8 @@ rule beta_diversity_weighted:
     params:
         meta="metadata.tsv",
         column=config["beta_diversity"]["column"]
+    conda:
+        "../envs/qiime2-2019.7.yaml"
     shell:
         ("qiime diversity beta-group-significance --i-distance-matrix {input} "
         "--m-metadata-file {params.meta} --m-metadata-column {params.column} "
@@ -132,6 +144,8 @@ rule filter_table_byrare:
         "logs/qiime_rarification_filter.log"
     params:
         16000
+    conda:
+        "../envs/qiime2-2019.7.yaml"
     shell:
         ("qiime feature-table filter-samples --i-table {input} --p-min-frequency {params} "
         "--o-filtered-table {output} &> {log}")

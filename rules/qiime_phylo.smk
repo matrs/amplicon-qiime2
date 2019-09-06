@@ -13,6 +13,8 @@ rule fragment_insertion:
         "logs/qiime_sepp.log"
     threads: 12
     priority: 1
+    conda:
+        "../envs/qiime2-2019.7.yaml"
     shell:
         ("qiime fragment-insertion sepp --i-representative-sequences {input} "
         "--o-tree {output.tree} --o-placements {output.placements} --p-threads {threads} "
@@ -30,6 +32,8 @@ rule mafft_fastree:
     log:
       "logs/qiime_mafft_fastree.log"
     threads: 6
+    conda:
+        "../envs/qiime2-2019.7.yaml"
     shell:
         ("qiime phylogeny align-to-tree-mafft-fasttree --i-sequences {input} "
         "--o-alignment {output.align_seqs} --o-masked-alignment {output.masked_align} "    
@@ -44,6 +48,8 @@ rule alignment:
     log:
         "logs/qiime_mafft.log"
     threads: 6
+    conda:
+        "../envs/qiime2-2019.7.yaml"
     shell:
         ("qiime alignment mafft --i-sequences {input} --p-n-threads 6  "
         "--o-alignment {output} &> {log}")
@@ -55,6 +61,8 @@ rule mask_alignment:
         "results/qiime/phylo/mafft_rep-seqs_masked.qza"
     log:
         "logs/qiime_mafft_masked.log"
+    conda:
+        "../envs/qiime2-2019.7.yaml"
     shell:
         "qiime alignment mask --i-alignment {input}  --o-masked-alignment {output}"
 

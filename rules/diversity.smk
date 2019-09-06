@@ -9,6 +9,8 @@ rule alpha_rare:
         meta="metdata.tsv",
         min_depth=100,
         max_depth=145000
+    conda:
+        "../envs/qiime2-2019.7.yaml"
     shell:
         ("qiime diversity alpha-rarefaction --i-table {input} "
         "--m-metadata-file {params.meta} --o-visualization {output} "
@@ -29,6 +31,8 @@ rule core_metrics:
     params:
         depth=16000,
         meta="metadata.tsv"
+    conda:
+        "../envs/qiime2-2019.7.yaml"
     shell:
         ("qiime diversity core-metrics-phylogenetic  --i-phylogeny {input.tree} "
         "--i-table {input.table} --p-sampling-depth {params.depth} "
@@ -44,6 +48,8 @@ rule alpha_evennes:
         "logs/qiime_evenness.log"
     params:
         meta="metadata.tsv"
+    conda:
+        "../envs/qiime2-2019.7.yaml"
     shell:
         ("qiime diversity alpha-group-significance --i-alpha-diversity {input} " 
         "--m-metadata-file {params.meta} --o-visualization {output}")
@@ -58,6 +64,8 @@ rule alpha_faith:
         "logs/qiime_faith.log"
     params:
         meta="metadata.tsv"        
+    conda:
+        "../envs/qiime2-2019.7.yaml"
     shell:
         ("qiime diversity alpha-group-significance --i-alpha-diversity {input} "
         "--m-metadata-file {params.meta} --o-visualization {output}  &> {log}")

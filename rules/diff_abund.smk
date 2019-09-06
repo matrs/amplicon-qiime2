@@ -8,6 +8,8 @@ rule filter_low_ASVs:
     params:
         min_freq=10,
         min_samples=2
+    conda:
+        "../envs/qiime2-2019.7.yaml"
     shell:
         ("qiime feature-table filter-features --i-table {input} "
         "--p-min-frequency {params.min_freq} --p-min-samples {params.min_samples} "
@@ -22,6 +24,8 @@ rule add_pseudocount:
     log:
         "logs/qiime_add_pseudocount.log"
     params:
+    conda:
+        "../envs/qiime2-2019.7.yaml"
     shell:
         ("qiime composition add-pseudocount --i-table {input} "
         "--o-composition-table {output} &> {log}")
@@ -37,6 +41,8 @@ rule ancom:
     params:
         meta="metadata.tsv",
         column="description"
+    conda:
+        "../envs/qiime2-2019.7.yaml"
     shell:
         ("qiime composition ancom --i-table {input} --m-metadata-file {params.meta} "
         "--m-metadata-column {params.column} --o-visualization {output}")
@@ -52,6 +58,8 @@ rule taxo_collapse:
         "logs/taxo_collapse.log"
     params:
         level=6
+    conda:
+        "../envs/qiime2-2019.7.yaml"
     shell:
         ("qiime taxa collapse --i-table {input.feat_table} --i-taxonomy {input.taxo} "
         "--p-level {params.level} --o-collapsed-table {output}")
@@ -64,6 +72,8 @@ rule add_pseudocount_collapsed:
     log:
         "logs/qiime_add_pseudocount_taxo.log"
     params:
+    conda:
+        "../envs/qiime2-2019.7.yaml"
     shell:
         ("qiime composition add-pseudocount --i-table {input} "
         "--o-composition-table {output} &> {log}")
@@ -78,6 +88,8 @@ rule ancom_collapsed:
     params:
         meta="metadata.tsv",
         column="description"
+    conda:
+        "../envs/qiime2-2019.7.yaml"
     shell:
         ("qiime composition ancom --i-table {input} --m-metadata-file {params.meta} "
         "--m-metadata-column {params.column} --o-visualization {output}")
