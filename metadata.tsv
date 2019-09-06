@@ -1,0 +1,18 @@
+sample-id	barcode-sequence	description
+#q2:types	categorical	categorical
+R1	GAGTCACT	Altered Basalt
+R1A	GAGTCAGA	Altered Basalt
+R2	GAGATCTC	Altered Basalt
+R3	GAGATGAC	Altered Basalt
+R4	GAGTCTCA	Altered Basalt
+R5	GAGAGTGT	Altered Basalt
+R6	GAGATCAG	Altered Basalt
+R7	GAGTGACA	Lithified carbonate
+R8	GAGTAGTG	Glassy Basalt
+R9	GAGTACAG	Glassy Basalt
+R10	GAGTCTGT	Glassy Basalt
+R11	GAGTACTC	Glassy Basalt
+R12	GAGATGTG	Basalt, thin blank rind
+R11-BF	GAGTAGAC	Green veneer from R11
+BW-1	GAGTGAGT	Bottom seawater
+BW-2	GAGTGTCT	Bottom seawater

@@ -1,0 +1,26 @@
+# samples: samples.tsv
+units: units.tsv
+metadata: metadata.tsv
+
+# Sequencing adapters
+adapterF: GTGCCAGCMGCCGCGGTAA...ATTAGAWACCCBDGTAGTCC
+adapterR: GGACTACHVGGGTWTCTAAT...TTACCGCGGCKGCTGGCAC
+
+# ref:
+#   transcriptome: "data/ref/transcriptome.chr21.fa"
+#   species: hsapiens
+
+classifierDB: "silva-132-99-515-806-nb-classifier.qza"
+
+beta_diversity:
+  column: "description"
+
+params:
+  cutadapt-se: ""
+  cutadapt-pe: ""
+  fastq_screen: '' 
+  multiqc: --title "Adapter trimming and QC" 
+           --comment "Adapter trimming with cutadapt and quality control with fastqc"
+  dada2: --p-trunc-len-f 240 --p-trunc-len-r 230 --p-trim-left-f 0 
+           --p-trim-left-r 0 --p-chimera-method consensus
+  
