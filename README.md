@@ -30,3 +30,6 @@ ANCOM, using its `qiime` plugin.
 
 `snakemake -pr -j $Core_Number`
 
+### Pipeline's directed acyclic graph
+
+![DAG](/dag_rules.svg)

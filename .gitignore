@@ -23,6 +23,7 @@ scripts/.snakemake*
 !.test/data
 !metadata.tsv
 !snakemake_wrapper.sh
+!dag_rules.svg
 rules/common.smk~
 rules/diff_abund.smk~
 rules/diversity.smk~
