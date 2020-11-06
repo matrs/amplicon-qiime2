@@ -19,7 +19,7 @@ def sample_list():
 def groups_it(iterable, n):
     '''
     Creates tuples of groups of `n` files each. Takes as input any iterable, here I expect
-    a sorted list of files produced by `glob` or other. The last element of a tuple isn't 
+    a sorted list of files produced by `glob` or similar. The last element of a tuple isn't 
     the first element of the next one.
     '''
     return zip(*[iter(iterable)]*n)
